@@ -32,6 +32,6 @@ npm start
 
 ## REST Client
 
-### Acess the application in the browser
+### Access the application in the browser
 
 The application will be running on port 3001!
