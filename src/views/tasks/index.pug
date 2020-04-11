@@ -1,0 +1,31 @@
+extends ../layout.pug
+
+block content
+    div(class='row my-2')
+        div.col
+            h4.display-4= contentTitle
+    div.row
+        div(class='col mb-3')
+            a(class='btn btn-dark mx-1', href="/tasks/create", role='button') Create
+    div.row
+        div.col
+            table(class='table table-striped table-bordered table-hover')
+                thead.thead-dark
+                    tr
+                        th(scope='col')= 'Id'
+                        th(scope='col')= 'Name'
+                        th(scope='col')= 'Description'
+                        th(scope='col')= 'Is Done?'
+                        th(scope='col')
+                tbody
+                    each task in tasks
+                        tr
+                            th(scope='row')= task.id
+                            td= task.name
+                            td= task.description
+                            td
+                                input(type='checkbox', checked=task.isDone, disabled)
+                            td
+                                a(class='btn btn-dark mx-1', role='button', href='/tasks/details/' + task.id) Details
+                                a(class='btn btn-dark mx-1', role='button', href='/tasks/edit/' + task.id) Edit
+                                a(class='btn btn-dark mx-1', role='button', href='/tasks/delete/' + task.id) Delete

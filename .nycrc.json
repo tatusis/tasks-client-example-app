@@ -1,0 +1,9 @@
+{
+    "all": true,
+    "require": [
+        "source-map-support/register"
+    ],
+    "exclude": [
+        "src/server.ts"
+    ]
+}

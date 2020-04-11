@@ -1,0 +1,20 @@
+extends ../layout.pug
+
+block content
+    div(class='row my-2')
+        div.col
+            h4.display-4= contentTitle
+    div.row
+        div(class='col mb-3')
+            a(class='btn btn-dark mx-1', href="/tasks", role='button') Back to list
+    div.row
+        div(class='col ml-1')
+            dt= 'Id:'
+            dd= task.id
+            dt= 'Name:'
+            dd= task.name
+            dt= 'Description:'
+            dd= task.description
+            dt= 'Is Done?'
+            dd
+                input(type='checkbox', checked=task.isDone, disabled)

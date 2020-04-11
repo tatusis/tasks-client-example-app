@@ -1,0 +1,22 @@
+extends ../layout.pug
+
+block content
+    div(class='row my-2')
+        div.col
+            h4.display-4= contentTitle
+    div.row
+        div(class='col mb-3')
+            a(class='btn btn-dark mx-1', href="/tasks", role='button') Back to list
+    div.row
+        div.col-4
+            form(method='post', action='/tasks/edit/' + task.id)
+                div.form-group
+                    label(for='name')= 'Name'
+                    input(class='form-control', type='text', id='name', name='name', placeholder='Name', value=task.name)
+                div.form-group
+                    label(for='description')= 'Description'
+                    input(class='form-control', type='text', id='description', name='description', placeholder='Description', value=task.description)
+                div.form-check
+                    input(class='form-check-input', type='checkbox', id="isDone", name='isDone', checked=task.isDone)
+                    label(class='form-check-label', for='isDone') Is Done?
+                button(class='btn btn-dark mx-1 mt-3', type='submit')= 'Edit'
