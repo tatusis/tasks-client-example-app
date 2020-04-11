@@ -4,12 +4,12 @@ Tasks Client (REST) developed on node.js, express and axios.
 
 ## Requirements
 
-Sqlite3 must be in the system path
+Tasks API must be running on port 3000!
 
 ## How to use
 
 ```
-git clone https://github.com/tatusis/tasks-api-example-app.git
+git clone https://github.com/tatusis/tasks-client-example-app.git
 ```
 
 ### Step 1 - Install dependencies
@@ -30,60 +30,8 @@ npm run build
 npm start
 ```
 
-## REST API
+## REST Client
 
-### Return all tasks
+### Acess the application in the browser
 
-```
-GET localhost:3000/tasks
-```
-
-### Create a new task - You need to pass a json as the request body
-
-* Request example
-
-```
-POST localhost:3000/tasks
-```
-
-* Request body example
-
-```json
-{
-    "name": "task name",
-    "description": "task description",
-    "isDone": false
-}
-```
-
-### Return a task by ID - You need to pass an ID as a request parameter
-
-* Request example
-
-```
-GET localhost:3000/tasks/1
-```
-
-### Update a task - You need to pass an ID as a request parameter and a json as the request body
-
-* Request example
-
-```
-PUT localhost:3000/tasks/1
-```
-
-* Request body example
-
-```json
-{
-    "isDone": true
-}
-```
-
-### Remove task
-
-* Request example
-
-```
-DELETE localhost:3000/tasks/1
-```
+The application will be running on port 3001!
