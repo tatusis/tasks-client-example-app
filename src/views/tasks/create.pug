@@ -12,11 +12,27 @@ block content
             form(method='post', action='/tasks/create')
                 div.form-group
                     label(for='name')= 'Name'
-                    input(class='form-control', type='text', id='name', name='name', placeholder='Name')
+                    if (nameErrors && nameErrors.length > 0)
+                        input(class='form-control is-invalid', type='text', id='name', name='name', placeholder='Name')
+                        each nameError in nameErrors
+                            div.invalid-feedback= nameError.msg
+                    else
+                        input(class='form-control', type='text', id='name', name='name', placeholder='Name')
                 div.form-group
                     label(for='description')= 'Description'
-                    input(class='form-control', type='text', id='description', name='description', placeholder='Description')
+                    if (descriptionErrors && descriptionErrors.length > 0)
+                        input(class='form-control is-invalid', type='text', id='description', name='description', placeholder='Description')
+                        each descriptionError in descriptionErrors
+                            div.invalid-feedback= descriptionError.msg
+                    else
+                        input(class='form-control', type='text', id='description', name='description', placeholder='Description')
                 div.form-check
-                    input(class='form-check-input', type='checkbox', id="isDone", name='isDone')
-                    label(class='form-check-label', for='isDone') Is Done?
+                    if (isDoneErrors && isDoneErrors.length > 0)
+                        input(class='form-check-input is-invalid', type='checkbox', id="isDone", name='isDone')
+                        label(class='form-check-label', for='isDone') Is Done?
+                        each isDoneError in isDoneErrors
+                            div.invalid-feedback= isDoneError.msg
+                    else
+                        input(class='form-check-input', type='checkbox', id="isDone", name='isDone')
+                        label(class='form-check-label', for='isDone') Is Done?
                 button(class='btn btn-dark mx-1 mt-3', type='submit')= 'Create'

@@ -25,6 +25,30 @@ class TasksClient {
                 path.join(process.cwd(), '/node_modules/bootstrap/dist/css')
             )
         )
+        this.app.use(
+            '/js',
+            express.static(
+                path.join(
+                    process.cwd(),
+                    '/node_modules/node_modules/jquery/dist'
+                )
+            )
+        )
+        this.app.use(
+            '/js',
+            express.static(
+                path.join(
+                    process.cwd(),
+                    '/node_modules/@popperjs/core/dist/umd'
+                )
+            )
+        )
+        this.app.use(
+            '/js',
+            express.static(
+                path.join(process.cwd(), '/node_modules/bootstrap/dist/js')
+            )
+        )
         this.app.set('view engine', 'pug')
         this.app.set('views', path.join(__dirname, 'views'))
     }
