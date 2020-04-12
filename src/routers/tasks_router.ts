@@ -23,7 +23,9 @@ class TasksRouter {
                             tasks: result.data
                         })
                     })
-                    .catch(next)
+                    .catch((error: any) => {
+                        next(error.response || error)
+                    })
             }
         )
 
@@ -39,7 +41,7 @@ class TasksRouter {
                         })
                     })
                     .catch((error: any) => {
-                        next(error.response)
+                        next(error.response || error)
                     })
             }
         )
@@ -116,7 +118,7 @@ class TasksRouter {
                         })
                     })
                     .catch((error: any) => {
-                        next(error.response)
+                        next(error.response || error)
                     })
             }
         )
@@ -179,7 +181,7 @@ class TasksRouter {
                         })
                     })
                     .catch((error: any) => {
-                        next(error.response)
+                        next(error.response || error)
                     })
             }
         )
@@ -207,7 +209,7 @@ class TasksRouter {
             (err: any, req: Request, res: Response, next: NextFunction) => {
                 res.render('tasks/error', {
                     contentTitle: 'Error',
-                    error: err.data
+                    error: err.data || err
                 })
             }
         )
