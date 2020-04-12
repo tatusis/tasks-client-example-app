@@ -46,7 +46,12 @@ class TasksRouter {
             '/create',
             (req: Request, res: Response, next: NextFunction) => {
                 res.render('tasks/create', {
-                    contentTitle: 'Create'
+                    contentTitle: 'Create',
+                    task: {
+                        name: '',
+                        description: '',
+                        isDone: false
+                    }
                 })
             }
         )
@@ -57,7 +62,8 @@ class TasksRouter {
                 body('name').notEmpty().withMessage('Please provide a name.'),
                 body('description')
                     .notEmpty()
-                    .withMessage('Please provide a description.')
+                    .withMessage('Please provide a description.'),
+                body('isDone').toBoolean()
             ],
             (req: Request, res: Response, next: NextFunction) => {
                 const errors = validationResult(req).array()
@@ -78,7 +84,7 @@ class TasksRouter {
                         task: {
                             name: req.body.name,
                             description: req.body.description,
-                            isDone: req.body.isDone ? true : false
+                            isDone: req.body.isDone
                         }
                     })
                 } else {
@@ -86,7 +92,7 @@ class TasksRouter {
                         .post('/tasks', {
                             name: req.body.name,
                             description: req.body.description,
-                            isDone: req.body.isDone ? true : false
+                            isDone: req.body.isDone
                         })
                         .then((result: AxiosResponse<any>) => {
                             res.redirect('/tasks')
@@ -117,7 +123,8 @@ class TasksRouter {
                 body('name').notEmpty().withMessage('Please provide a name.'),
                 body('description')
                     .notEmpty()
-                    .withMessage('Please provide a description.')
+                    .withMessage('Please provide a description.'),
+                body('isDone').toBoolean()
             ],
             (req: Request, res: Response, next: NextFunction) => {
                 const errors = validationResult(req).array()
@@ -138,7 +145,7 @@ class TasksRouter {
                         task: {
                             name: req.body.name,
                             description: req.body.description,
-                            isDone: req.body.isDone ? true : false
+                            isDone: req.body.isDone
                         }
                     })
                 } else {
@@ -146,7 +153,7 @@ class TasksRouter {
                         .put('/tasks/' + req.params.id, {
                             name: req.body.name,
                             description: req.body.description,
-                            isDone: req.body.isDone ? true : false
+                            isDone: req.body.isDone
                         })
                         .then((result: AxiosResponse<any>) => {
                             res.redirect('/tasks')
