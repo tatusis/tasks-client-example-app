@@ -27,12 +27,6 @@ block content
                     else
                         input(class='form-control', type='text', id='description', name='description', placeholder='Description')
                 div.form-check
-                    if (isDoneErrors && isDoneErrors.length > 0)
-                        input(class='form-check-input is-invalid', type='checkbox', id="isDone", name='isDone')
-                        label(class='form-check-label', for='isDone') Is Done?
-                        each isDoneError in isDoneErrors
-                            div.invalid-feedback= isDoneError.msg
-                    else
-                        input(class='form-check-input', type='checkbox', id="isDone", name='isDone')
-                        label(class='form-check-label', for='isDone') Is Done?
+                    input(class='form-check-input', type='checkbox', id="isDone", name='isDone')
+                    label(class='form-check-label', for='isDone') Is Done?
                 button(class='btn btn-dark mx-1 mt-3', type='submit')= 'Create'

@@ -54,40 +54,20 @@ class TasksRouter {
         this.router.post(
             '/create',
             [
-                body('name')
-                    .not()
-                    .isEmpty()
-                    .withMessage('Please provide a name.'),
+                body('name').notEmpty().withMessage('Please provide a name.'),
                 body('description')
-                    .not()
-                    .isEmpty()
+                    .notEmpty()
                     .withMessage('Please provide a description.')
-                    .isLength({ min: 2 })
-                    .withMessage('Message is too short.'),
-                body('isDone')
-                    .not()
-                    .isEmpty()
-                    .withMessage('Please provide a status.')
             ],
             (req: Request, res: Response, next: NextFunction) => {
                 const errors = validationResult(req).array()
 
                 const nameErrors = errors.filter(error => {
-                    if (error.param == 'name') {
-                        return true
-                    }
+                    return error.param == 'name'
                 })
 
                 const descriptionErrors = errors.filter(error => {
-                    if (error.param == 'description') {
-                        return true
-                    }
-                })
-
-                const isDoneErrors = errors.filter(error => {
-                    if (error.param == 'isDone') {
-                        return true
-                    }
+                    return error.param == 'description'
                 })
 
                 if (errors.length > 0) {
@@ -95,7 +75,11 @@ class TasksRouter {
                         contentTitle: 'Create',
                         nameErrors: nameErrors,
                         descriptionErrors: descriptionErrors,
-                        isDoneErrors: isDoneErrors
+                        task: {
+                            name: req.body.name,
+                            description: req.body.description,
+                            isDone: req.body.isDone ? true : false
+                        }
                     })
                 } else {
                     this.instance
@@ -129,17 +113,46 @@ class TasksRouter {
 
         this.router.post(
             '/edit/:id',
+            [
+                body('name').notEmpty().withMessage('Please provide a name.'),
+                body('description')
+                    .notEmpty()
+                    .withMessage('Please provide a description.')
+            ],
             (req: Request, res: Response, next: NextFunction) => {
-                this.instance
-                    .put('/tasks/' + req.params.id, {
-                        name: req.body.name,
-                        description: req.body.description,
-                        isDone: req.body.isDone ? true : false
+                const errors = validationResult(req).array()
+
+                const nameErrors = errors.filter(error => {
+                    return error.param == 'name'
+                })
+
+                const descriptionErrors = errors.filter(error => {
+                    return error.param == 'description'
+                })
+
+                if (errors.length > 0) {
+                    res.render('tasks/edit', {
+                        contentTitle: 'Edit',
+                        nameErrors: nameErrors,
+                        descriptionErrors: descriptionErrors,
+                        task: {
+                            name: req.body.name,
+                            description: req.body.description,
+                            isDone: req.body.isDone ? true : false
+                        }
                     })
-                    .then((result: AxiosResponse<any>) => {
-                        res.redirect('/tasks')
-                    })
-                    .catch(next)
+                } else {
+                    this.instance
+                        .put('/tasks/' + req.params.id, {
+                            name: req.body.name,
+                            description: req.body.description,
+                            isDone: req.body.isDone ? true : false
+                        })
+                        .then((result: AxiosResponse<any>) => {
+                            res.redirect('/tasks')
+                        })
+                        .catch(next)
+                }
             }
         )
 
