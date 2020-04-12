@@ -48,8 +48,8 @@ class TasksRouter {
                 res.render('tasks/create', {
                     contentTitle: 'Create',
                     task: {
-                        name: '',
-                        description: '',
+                        name: null,
+                        description: null,
                         isDone: false
                     }
                 })
