@@ -28,10 +28,7 @@ class TasksClient {
         this.app.use(
             '/js',
             express.static(
-                path.join(
-                    process.cwd(),
-                    '/node_modules/node_modules/jquery/dist'
-                )
+                path.join(process.cwd(), '/node_modules/jquery/dist')
             )
         )
         this.app.use(
