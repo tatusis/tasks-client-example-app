@@ -38,7 +38,9 @@ class TasksRouter {
                             task: result.data
                         })
                     })
-                    .catch(next)
+                    .catch((error: any) => {
+                        next(error.response)
+                    })
             }
         )
 
@@ -113,7 +115,9 @@ class TasksRouter {
                             task: result.data
                         })
                     })
-                    .catch(next)
+                    .catch((error: any) => {
+                        next(error.response)
+                    })
             }
         )
 
@@ -174,7 +178,9 @@ class TasksRouter {
                             task: result.data
                         })
                     })
-                    .catch(next)
+                    .catch((error: any) => {
+                        next(error.response)
+                    })
             }
         )
 
@@ -190,9 +196,19 @@ class TasksRouter {
             }
         )
 
+        this.router.use((req: Request, res: Response, next: NextFunction) => {
+            res.render('tasks/404', {
+                contentTitle: 'Argh, no!',
+                message: "Don't be mad, but that URL doesn't live here."
+            })
+        })
+
         this.router.use(
             (err: any, req: Request, res: Response, next: NextFunction) => {
-                res.status(500).send(err)
+                res.render('tasks/error', {
+                    contentTitle: 'Error',
+                    error: err.data
+                })
             }
         )
     }

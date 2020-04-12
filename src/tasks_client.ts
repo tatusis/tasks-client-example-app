@@ -6,6 +6,7 @@ import http from 'http'
 import logger from 'morgan'
 import path from 'path'
 
+import { DefaultRouter } from './routers/default_router'
 import { TasksRouter } from './routers/tasks_router'
 
 class TasksClient {
@@ -60,7 +61,9 @@ class TasksClient {
 
     public start(): void {
         const tasksRouter = new TasksRouter()
+        const defaultRouter = new DefaultRouter()
         this.app.use('/tasks', tasksRouter.router)
+        this.app.use(defaultRouter.router)
         this.server = http.createServer(this.app)
         this.server.listen('3001')
     }
